@@ -152,7 +152,7 @@ public class PlayerControls : MonoBehaviour
             }
         }
 
-        _sticking = (0 != stickyCount);
+        _sticking = ((0f != _stickForce) && (0 != stickyCount));
         if (_sticking)
         {
             _stickyNormal = stickyNormal / ((float)stickyCount);
