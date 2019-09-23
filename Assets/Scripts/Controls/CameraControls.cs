@@ -9,6 +9,7 @@ public class CameraControls : MonoBehaviour
     public float sensitivity = 1f;
     public float smooth = 1000f;
 
+    private Quaternion quarts;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +22,23 @@ public class CameraControls : MonoBehaviour
     {
         rotation.x += Input.GetAxis("Horizontal") * sensitivity;
         //rotation.y += Input.GetAxis("Vertical") * sensitivity;
-
+            
         rotation.y = Mathf.Clamp(rotation.y, -60f, 60f);
         rotation.x = Mathf.Clamp(rotation.x, -90f, 90f);
 
-        Quaternion quarts = Quaternion.Euler(rotation.y, rotation.x, 0f);
-        parent.rotation = Quaternion.Lerp(parent.rotation, quarts, Time.deltaTime * smooth);
+        if (rotation.x > 0)
+        {
+            //Quaternion.FromToRotation(new Vector3(0, 0, 0), rotX);
+        }
+        //else if (rotation.x < 0)
+        //{
+        //    //quarts = Quaternion.Euler(0, -90f, 0f);
+        //}
+
+        quarts = Quaternion.Euler(0f, rotation.x, 0f);
+        parent.rotation = Quaternion.Slerp(parent.rotation, quarts, Time.deltaTime * smooth);
+        //parent.rotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), rotX);
+
 
         //// Rotate the cube by converting the angles into a quaternion.
         //Quaternion target = Quaternion.Euler(RotX, 0, RotZ);
