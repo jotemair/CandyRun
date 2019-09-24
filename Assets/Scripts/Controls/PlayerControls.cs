@@ -30,6 +30,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private int _maxJumpCount = 1;
 
+    [SerializeField]
+    private float _airForceMultiplier = 1f;
+
     private Vector3 _movementInput = Vector3.zero;
     private bool _jumpInput = false;
 
@@ -90,7 +93,7 @@ public class PlayerControls : MonoBehaviour
 
         _g.Gravity = ((_sticking) ? (_gravityWhileSticking) : (CustomGravity.DEFAULT_GRAVITY));
 
-        _rb.AddForce(_movementInput * _moveForce);
+        _rb.AddForce(_movementInput * _moveForce * (_grounded ? 1f : _airForceMultiplier));
 
         if (_sticking)
         {
