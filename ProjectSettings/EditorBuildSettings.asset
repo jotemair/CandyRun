@@ -4,5 +4,29 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scripts/Menus/not sctit[s/menu_001.unity
+    guid: 620abc6a425056343b3ea45055729d97
+  - enabled: 0
+    path: Assets/Scripts/Menus/not sctit[s/game_start_scenece.unity
+    guid: 33e736721afc40e439569f866e78ab8a
+  - enabled: 0
+    path: Assets/Scripts/Menus/not sctit[s/optios.unity
+    guid: 33ca81ee3469d0441af4c3344d046279
+  - enabled: 1
+    path: Assets/Scenes/menus/menu_001.unity
+    guid: f8c5c40e7ec43944d8c7c8f20668b776
+  - enabled: 1
+    path: Assets/Scenes/menus/game_start_scenece.unity
+    guid: 848904d08c3c1c5428168b6529a54c8e
+  - enabled: 1
+    path: Assets/Scenes/menus/optios.unity
+    guid: 675cfdf9d57b82c489290335e0bbf471
+  - enabled: 1
+    path: Assets/Scenes/Test/TestScene_AR.unity
+    guid: ce3388b7e7e62ce4da54860b3e7a1a47
+  - enabled: 1
+    path: Assets/Scenes/Test/TestScene_Wind.unity
+    guid: 9f1f02ec59b5ed04585183977b0042a0
   m_configObjects: {}
