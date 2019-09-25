@@ -23,10 +23,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float _pitchMax = 50f;
 
-    [SerializeField]
     private float _pitch = 0f;
 
-    [SerializeField]
     private float _angle = 0f;
 
     // Start is called before the first frame update

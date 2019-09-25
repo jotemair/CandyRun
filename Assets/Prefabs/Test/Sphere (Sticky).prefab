@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6797747761641358665}
   - component: {fileID: 6797747761641358671}
   - component: {fileID: 6797747761641358664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4714,7 +4714,7 @@ GameObject:
   - component: {fileID: 6797747761649613036}
   - component: {fileID: 6797747761649613037}
   - component: {fileID: 6797747761649613038}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (Sticky)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4843,6 +4843,7 @@ MonoBehaviour:
   _jumpForce: 0
   _canAirjump: 1
   _maxJumpCount: 0
+  _airForceMultiplier: 1
 --- !u!114 &6797747761649613038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4866,7 +4867,7 @@ GameObject:
   - component: {fileID: 6797747762249512394}
   - component: {fileID: 6797747762249512392}
   - component: {fileID: 6797747762249512393}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

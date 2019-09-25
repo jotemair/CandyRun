@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2782744744672215977}
   - component: {fileID: 2782744744672215979}
   - component: {fileID: 2782744744672215978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 2782744746068833066}
   - component: {fileID: 2782744746068833068}
   - component: {fileID: 2782744746068833067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4806,7 +4806,7 @@ GameObject:
   - component: {fileID: 2782744746077425295}
   - component: {fileID: 2782744746077425294}
   - component: {fileID: 2782744746077425293}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (Light)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4935,6 +4935,7 @@ MonoBehaviour:
   _jumpForce: 190
   _canAirjump: 1
   _maxJumpCount: 1
+  _airForceMultiplier: 1
 --- !u!114 &2782744746077425293
 MonoBehaviour:
   m_ObjectHideFlags: 0
