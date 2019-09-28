@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 2782744746077425295}
   - component: {fileID: 2782744746077425294}
   - component: {fileID: 2782744746077425293}
-  - component: {fileID: 97501178142884112}
   m_Layer: 9
   m_Name: Sphere (Light)
   m_TagString: Player
@@ -238,6 +237,7 @@ MonoBehaviour:
   _canAirjump: 1
   _maxJumpCount: 1
   _airForceMultiplier: 0.5
+  _coyoteTime: 0
 --- !u!114 &2782744746077425293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,20 +250,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f70bcfda8a73f544bd4ad264c59b892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &97501178142884112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2782744746077425292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279cbdb1fe40edf448be06701489ba2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _distance: 10
-  _angleSpeed: 5
-  _pitchSpeed: 5
-  _pitchMin: -5
-  _pitchMax: 50

@@ -236,7 +236,8 @@ MonoBehaviour:
   _jumpForce: 1000
   _canAirjump: 0
   _maxJumpCount: 1
-  _airForceMultiplier: 0.2
+  _airForceMultiplier: 0.7
+  _coyoteTime: 0.2
 --- !u!114 &7922411693180393106
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -36,6 +36,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private float _coyoteTime = 0f;
 
+    private float _coyoteTimer = 0f;
+
     private Vector3 _movementInput = Vector3.zero;
     private bool _jumpInput = false;
 
@@ -105,15 +107,18 @@ public class PlayerControls : MonoBehaviour
         }
 
         _jumpTimer = Mathf.Max(0f, _jumpTimer - Time.deltaTime);
+        _coyoteTimer = (_grounded ? _coyoteTime : Mathf.Max(0f, _coyoteTimer - Time.deltaTime));
 
         if (_jumpInput && (0 < _storedJumps))
         {
-            --_storedJumps;
-            _jumpTimer = _jumpTimeout;
+            Vector3 jumpVector = (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero));
 
-            Vector3 jumpVector = (_grounded ? _lowestNormal : (_canAirjump ? Vector3.up : Vector3.zero));
-
-            GetComponent<Rigidbody>().AddForce(jumpVector * _jumpForce, ForceMode.Impulse);
+            if (Vector3.zero != jumpVector)
+            {
+                --_storedJumps;
+                _jumpTimer = _jumpTimeout;
+                GetComponent<Rigidbody>().AddForce(jumpVector * _jumpForce, ForceMode.Impulse);
+            }
         }
         else if ((_grounded) && (0f == _jumpTimer))
         {

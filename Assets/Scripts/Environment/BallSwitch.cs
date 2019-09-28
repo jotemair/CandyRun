@@ -13,8 +13,9 @@ public class BallSwitch : MonoBehaviour
     {
         if (_active && (other.CompareTag("Player")))
         {
+            Vector3 pos = other.transform.position;
             Destroy(other.gameObject);
-            Spawn();
+            Spawn(pos);
         }
     }
 
@@ -28,7 +29,12 @@ public class BallSwitch : MonoBehaviour
 
     public void Spawn()
     {
-        Instantiate<GameObject>(_ballPrefab, transform.position, Quaternion.identity);
+        Spawn(transform.position);
+    }
+
+    private void Spawn(Vector3 position)
+    {
+        Instantiate<GameObject>(_ballPrefab, position, Quaternion.identity);
         _active = false;
     }
 }
