@@ -33,11 +33,15 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private float _airForceMultiplier = 1f;
 
+    [SerializeField]
+    private float _coyoteTime = 0f;
+
     private Vector3 _movementInput = Vector3.zero;
     private bool _jumpInput = false;
 
     private Vector3 _contactNormal = Vector3.zero;
     private Vector3 _stickyNormal = Vector3.zero;
+    private Vector3 _lowestNormal = Vector3.zero;
 
     private Rigidbody _rb = null;
     private CustomGravity _g = null;
@@ -107,7 +111,7 @@ public class PlayerControls : MonoBehaviour
             --_storedJumps;
             _jumpTimer = _jumpTimeout;
 
-            Vector3 jumpVector = (_grounded ? _contactNormal : (_canAirjump ? Vector3.up : Vector3.zero));
+            Vector3 jumpVector = (_grounded ? _lowestNormal : (_canAirjump ? Vector3.up : Vector3.zero));
 
             GetComponent<Rigidbody>().AddForce(jumpVector * _jumpForce, ForceMode.Impulse);
         }
@@ -140,6 +144,8 @@ public class PlayerControls : MonoBehaviour
         Vector3 stickyNormal = Vector3.zero;
         int stickyCount = 0;
 
+        float minContactHeight = float.MaxValue;
+
         foreach (var collision in _collisions)
         {
             foreach (var contact in collision.Value)
@@ -152,6 +158,12 @@ public class PlayerControls : MonoBehaviour
 
                 contactNormal += contact.normal;
                 ++contactCount;
+
+                if (contact.point.y < minContactHeight)
+                {
+                    _lowestNormal = contact.normal;
+                    minContactHeight = contact.point.y;
+                }
             }
         }
 
