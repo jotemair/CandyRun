@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scripts/Menus/not sctit[s/menu_001.unity
-    guid: 620abc6a425056343b3ea45055729d97
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scripts/Menus/not sctit[s/game_start_scenece.unity
-    guid: 33e736721afc40e439569f866e78ab8a
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scripts/Menus/not sctit[s/optios.unity
-    guid: 33ca81ee3469d0441af4c3344d046279
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/menus/menu_001.unity
     guid: f8c5c40e7ec43944d8c7c8f20668b776
@@ -23,10 +23,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/menus/optios.unity
     guid: 675cfdf9d57b82c489290335e0bbf471
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test/TestScene_AR.unity
     guid: ce3388b7e7e62ce4da54860b3e7a1a47
   - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 649c19f03b69e9548af7c03606116e96
+  - enabled: 0
     path: Assets/Scenes/Test/TestScene_Wind.unity
     guid: 9f1f02ec59b5ed04585183977b0042a0
+  - enabled: 1
+    path: Assets/Scenes/lvl_T.unity
+    guid: 99566b610cfa41741a4f5dfd2b92f448
   m_configObjects: {}
