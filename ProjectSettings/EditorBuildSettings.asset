@@ -33,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Test/TestScene_Wind.unity
     guid: 9f1f02ec59b5ed04585183977b0042a0
   - enabled: 1
-    path: Assets/Scenes/lvl_T.unity
+    path: Assets/Scenes/t_test/lvl_T.unity
     guid: 99566b610cfa41741a4f5dfd2b92f448
   m_configObjects: {}
