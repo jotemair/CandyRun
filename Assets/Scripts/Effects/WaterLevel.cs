@@ -59,7 +59,7 @@ public class WaterLevel : MonoBehaviour
                 float Angle;
                 float Hipo;
 
-                Vector3 Sc_Center;
+                Vector3 Screen_Corner;
                 Vector3 X_Vector;
                 Vector3 Y_Vector;
 
@@ -78,11 +78,11 @@ public class WaterLevel : MonoBehaviour
                 Debug.DrawRay(transform.position + Hipo * ray_0.direction, X_Vector, Color.red);
                 Debug.DrawRay(transform.position + Hipo * ray_0.direction, Y_Vector, Color.green);
 
-                Sc_Center = transform.position + Hipo * ray_0.direction;
+                Screen_Corner = transform.position + Hipo * ray_0.direction;
 
                 _material.SetVector("_Vector_X", new Vector4(X_Vector.x, X_Vector.y, X_Vector.z, 0));
                 _material.SetVector("_Vector_Y", new Vector4(Y_Vector.x, Y_Vector.y, Y_Vector.z, 0));
-                _material.SetVector("_Screen_Center", new Vector4(Sc_Center.x, Sc_Center.y, Sc_Center.z, 0));
+                _material.SetVector("_Screen_Corner", new Vector4(Screen_Corner.x, Screen_Corner.y, Screen_Corner.z, 0));
 
                 _material.SetFloat("_WaterLevel", _waterLevel);
             }

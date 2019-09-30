@@ -53,7 +53,7 @@ Shader "Custom/Camera/WaterLevel"
 
 			float4 _Vector_X;
 			float4 _Vector_Y;
-			float4 _Screen_Center;
+			float4 _Screen_Corner;
 
 			float _WaterLevel;
 
@@ -76,15 +76,20 @@ Shader "Custom/Camera/WaterLevel"
 
 				float depthValue = Linear01Depth(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(IN.screenPos)).r);
 
-				float3 worldSpacePos = (_Vector_X * IN.screenPos.x + _Vector_Y * IN.screenPos.y + _Screen_Center) * depthValue + _WorldSpaceCameraPos;
+				float3 fragmentFarPlaneProjectionWorldPos = (_Vector_X * IN.screenPos.x + _Vector_Y * IN.screenPos.y + _Screen_Corner);
+				float3 viewDir = (fragmentFarPlaneProjectionWorldPos - _WorldSpaceCameraPos);
 
-				float3 viewDir = worldSpacePos - _WorldSpaceCameraPos;
+				float3 worldSpacePos = _WorldSpaceCameraPos + viewDir * depthValue;
+
 				float surfaceDistRatio = (_WaterLevel - _WorldSpaceCameraPos.y) / viewDir.y;
 				float3 waterSurfacePoint = _WorldSpaceCameraPos + viewDir * surfaceDistRatio;
 
 				float4 water = tex2D(_WaterTexture, float2(waterSurfacePoint.x % _WaterTexture_TexelSize.z, waterSurfacePoint.z % _WaterTexture_TexelSize.w));
 
-				float4 finalColor = (worldSpacePos.y < _WaterLevel) ? water : texColor;
+				bool waterLevelBetween = ((worldSpacePos.y <= _WaterLevel) && (_WaterLevel <= _WorldSpaceCameraPos.y)) ||
+										 ((_WorldSpaceCameraPos.y <= _WaterLevel) && (_WaterLevel <= worldSpacePos.y));
+
+				float4 finalColor = (waterLevelBetween) ? (water + (texColor * (1.0 - water.a))) : texColor;
 
 				return finalColor;
 			}

@@ -182,7 +182,7 @@ public class PlayerControls : MonoBehaviour
             _stickyNormal = Vector3.zero;
         }
 
-        _grounded = (0 != contactCount);
+        _grounded = (0 != contactCount) && (minContactHeight < transform.position.y - 0.2f);
         if (_grounded)
         {
             _contactNormal = contactNormal / ((float)contactCount);
