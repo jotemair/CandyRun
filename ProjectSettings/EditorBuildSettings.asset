@@ -35,7 +35,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/t_test/lvl_T.unity
     guid: 99566b610cfa41741a4f5dfd2b92f448
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/lvl_T_1.unity
     guid: 5776f3e83e9a56149b0cc5953ac428a3
+  - enabled: 1
+    path: Assets/Scenes/candy_Land_platformer.unity
+    guid: 1b52ed943d9256d47864809ac5e191de
   m_configObjects: {}

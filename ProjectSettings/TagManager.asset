@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sticky
   - WindArea
+  - restart
   layers:
   - Default
   - TransparentFX
