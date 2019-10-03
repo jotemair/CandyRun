@@ -10,7 +10,7 @@ public class restart : MonoBehaviour
     // Start is called before the first frame update
     public void OnTriggerEnter(Collider col)
     {
-        if (gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
             SceneManager.LoadScene(4);
             Debug.Log("restart");
