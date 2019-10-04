@@ -34,6 +34,12 @@ public class BallSwitch : MonoBehaviour
 
     private void Spawn(Vector3 position)
     {
+        RespawnSystem respawn = FindObjectOfType<RespawnSystem>();
+        if (null != respawn)
+        {
+            respawn.SetSpawner(this);
+        }
+
         Instantiate<GameObject>(_ballPrefab, position, Quaternion.identity);
         _active = false;
     }

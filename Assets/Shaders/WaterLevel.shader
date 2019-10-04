@@ -44,18 +44,37 @@ Shader "Custom/Camera/WaterLevel"
 			sampler2D _CameraDepthTexture;
 
 			// Parameters set from script
+
+			// Texture for the water surface
 			sampler2D _WaterTexture;
 
-			// Texture properties
+			// Texture properties (not set manually, automaticly filled)
 			// https://docs.unity3d.com/Manual/SL-PropertiesInPrograms.html
 			// For _TexelSize, x contains 1.0/width, y contains 1.0 / height, z contains width, w contains height
 			float4 _WaterTexture_TexelSize;
 
+			// Movement of the water surface texture (x, z, speed, 0)
+			float4 _WaterDirection;
+
+			// Color tint to apply to texture
+			fixed4 _ColorTint;
+
+			// Variables to calculate world position from depth
 			float4 _Vector_X;
 			float4 _Vector_Y;
 			float4 _Screen_Corner;
 
+			// Water level hight
 			float _WaterLevel;
+
+			// Noise map for disturbing the water surface
+			sampler2D _NoiseMap;
+
+			// _TexelSize, x contains 1.0/width, y contains 1.0 / height, z contains width, w contains height
+			float4 _NoiseMap_TexelSize;
+
+			// Movement of the noise map (x, z, speed, strength)
+			float4 _NoiseDirection;
 
 			v2f vert(appdata IN)
 			{
@@ -84,7 +103,19 @@ Shader "Custom/Camera/WaterLevel"
 				float surfaceDistRatio = (_WaterLevel - _WorldSpaceCameraPos.y) / viewDir.y;
 				float3 waterSurfacePoint = _WorldSpaceCameraPos + viewDir * surfaceDistRatio;
 
-				float4 water = tex2D(_WaterTexture, float2(waterSurfacePoint.x % _WaterTexture_TexelSize.z, waterSurfacePoint.z % _WaterTexture_TexelSize.w));
+				float2 waterCoords = float2((waterSurfacePoint.x + _WaterDirection.x * _WaterDirection.z * (_Time.x % _WaterTexture_TexelSize.w)),
+					                        (waterSurfacePoint.z + _WaterDirection.y * _WaterDirection.z * (_Time.x % _WaterTexture_TexelSize.w)));
+
+				float2 noiseCoords = float2((waterSurfacePoint.x + _NoiseDirection.x * _NoiseDirection.z * (_Time.x % _NoiseMap_TexelSize.w)),
+					                        (waterSurfacePoint.z + _NoiseDirection.y * _NoiseDirection.z * (_Time.x % _NoiseMap_TexelSize.w)));
+
+				float2 noiseAmmount = tex2D(_NoiseMap, noiseCoords) * _NoiseDirection.w;
+
+				waterCoords += noiseAmmount;
+
+				float2 waterUVpos = float2(waterCoords.x % _WaterTexture_TexelSize.z, waterCoords.y % _WaterTexture_TexelSize.w);
+
+				float4 water = tex2D(_WaterTexture, waterUVpos) * _ColorTint;
 
 				bool waterLevelBetween = ((worldSpacePos.y <= _WaterLevel) && (_WaterLevel <= _WorldSpaceCameraPos.y)) ||
 										 ((_WorldSpaceCameraPos.y <= _WaterLevel) && (_WaterLevel <= worldSpacePos.y));

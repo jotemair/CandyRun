@@ -69,7 +69,12 @@ public class CameraController : MonoBehaviour
 
     void PositionCamera(float pitch, float angle)
     {
-        _cam.transform.position = _player.transform.position - Quaternion.Euler(pitch, angle, 0f) * Vector3.forward * _distance;
-        _cam.transform.LookAt(_player.transform.position, Vector3.up);
+        float distance = _distance;
+        Quaternion rotation = Quaternion.Euler(pitch, angle, 0f);
+
+        Vector3 position = _player.transform.position + rotation * -Vector3.forward * _distance;
+
+        _cam.transform.rotation = rotation;
+        _cam.transform.position = position;
     }
 }

@@ -26,6 +26,32 @@ public class WaterLevel : MonoBehaviour
     [SerializeField]
     private float _waterLevel = 10f;
 
+    [SerializeField]
+    [Range(0f, 360f)]
+    private float _waterDirection = 37f;
+
+    [SerializeField]
+    [Range(0f, 20f)]
+    private float _waterSpeed = 5f;
+
+    [SerializeField]
+    private Color _waterTint = Color.white;
+
+    [SerializeField]
+    private Texture2D _noise = null;
+
+    [SerializeField]
+    [Range(0f, 360f)]
+    private float _noiseDirection = 17f;
+
+    [SerializeField]
+    [Range(0f, 20f)]
+    private float _noiseSpeed = 7f;
+
+    [SerializeField]
+    [Range(0f, 2f)]
+    private float _noiseStrength = 0.35f;
+
     #endregion
 
     #region MonoBehaviour functions
@@ -83,9 +109,16 @@ public class WaterLevel : MonoBehaviour
                 _material.SetVector("_Vector_X", new Vector4(X_Vector.x, X_Vector.y, X_Vector.z, 0));
                 _material.SetVector("_Vector_Y", new Vector4(Y_Vector.x, Y_Vector.y, Y_Vector.z, 0));
                 _material.SetVector("_Screen_Corner", new Vector4(Screen_Corner.x, Screen_Corner.y, Screen_Corner.z, 0));
-
-                _material.SetFloat("_WaterLevel", _waterLevel);
             }
+
+            _material.SetFloat("_WaterLevel", _waterLevel);
+            Vector3 waterDir = Quaternion.Euler(0f, _waterDirection, 0f) * Vector3.forward;
+            _material.SetVector("_WaterDirection", new Vector4(waterDir.x, waterDir.z, _waterSpeed, 0f));
+            _material.SetColor("_ColorTint", _waterTint);
+
+            _material.SetTexture("_NoiseMap", _noise);
+            Vector3 noiseDir = Quaternion.Euler(0f, _noiseDirection, 0f) * Vector3.forward;
+            _material.SetVector("_NoiseDirection", new Vector4(noiseDir.x, noiseDir.z, _noiseSpeed, _noiseStrength));
 
             Graphics.Blit(source, destination, _material);
         }
