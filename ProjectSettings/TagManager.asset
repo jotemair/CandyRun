@@ -7,6 +7,7 @@ TagManager:
   - Sticky
   - WindArea
   - restart
+  - boxo
   layers:
   - Default
   - TransparentFX
