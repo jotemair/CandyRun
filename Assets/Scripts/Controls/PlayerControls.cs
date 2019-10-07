@@ -40,6 +40,7 @@ public class PlayerControls : MonoBehaviour
 
     private Vector3 _movementInput = Vector3.zero;
     private bool _jumpInput = false;
+    private bool _jumpInputHeld = false;
 
     private Vector3 _contactNormal = Vector3.zero;
     private Vector3 _stickyNormal = Vector3.zero;
@@ -78,6 +79,11 @@ public class PlayerControls : MonoBehaviour
         set { _jumpInput = value; }
     }
 
+    public bool JumpInputHeld
+    {
+        set { _jumpInputHeld = value; }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -97,9 +103,14 @@ public class PlayerControls : MonoBehaviour
     {
         GetNormals();
 
+        _sticking = _sticking && !_jumpInputHeld;
+
         _g.Gravity = ((_sticking) ? (_gravityWhileSticking) : (CustomGravity.DEFAULT_GRAVITY));
 
-        _rb.AddForce(_movementInput * _moveForce * (_grounded ? 1f : _airForceMultiplier));
+        Quaternion stickRot = ((_sticking) ? (Quaternion.FromToRotation(Vector3.up, _stickyNormal)) : (Quaternion.identity));
+        _rb.AddForce(stickRot * _movementInput.normalized * _moveForce * (_grounded ? 1f : _airForceMultiplier));
+
+        Debug.DrawRay(transform.position, stickRot * _movementInput.normalized);
 
         if (_sticking)
         {
