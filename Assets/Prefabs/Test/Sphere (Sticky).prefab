@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveForce: 1100
   _stickForce: 1000
-  _gravityWhileSticking: 3
+  _gravityWhileSticking: 1.5
   _jumpForce: 0
   _canAirjump: 1
   _maxJumpCount: 0

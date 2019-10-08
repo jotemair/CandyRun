@@ -57,6 +57,9 @@ public class PlayerControls : MonoBehaviour
     private float _jumpTimeout = 0.1f;
     private float _jumpTimer = 0f;
 
+    [SerializeField]
+    private bool _speedBoost = false;
+
     private Dictionary<int, List<ContactPoint>> _collisions = new Dictionary<int, List<ContactPoint>>();
 
     public bool Grounded
@@ -110,7 +113,7 @@ public class PlayerControls : MonoBehaviour
         Quaternion stickRot = ((_sticking) ? (Quaternion.FromToRotation(Vector3.up, _stickyNormal)) : (Quaternion.identity));
         _rb.AddForce(stickRot * _movementInput.normalized * _moveForce * (_grounded ? 1f : _airForceMultiplier));
 
-        Debug.DrawRay(transform.position, stickRot * _movementInput.normalized);
+        // Debug.DrawRay(transform.position, stickRot * _movementInput.normalized);
 
         if (_sticking)
         {
@@ -122,7 +125,7 @@ public class PlayerControls : MonoBehaviour
 
         if (_jumpInput && (0 < _storedJumps))
         {
-            Vector3 jumpVector = (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero));
+            Vector3 jumpVector = (_speedBoost ? _rb.velocity.normalized : (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero)));
 
             if (Vector3.zero != jumpVector)
             {
