@@ -50,7 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 355845438378167487}
-  _oneTime: 1
+  _oneTime: 0
+  _onMaterial: {fileID: 2100000, guid: 9d795cf1bdce8324e97ca537cbd6ca3d, type: 2}
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -635,7 +636,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 237.35, y: 15.27, z: 211.15}
+  m_ConnectedAnchor: {x: 0, y: 0.1, z: 0}
   serializedVersion: 2
   m_Spring: 1500
   m_Damper: 0.2

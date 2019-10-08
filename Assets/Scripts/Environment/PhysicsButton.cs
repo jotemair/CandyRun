@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class PhysicsButton : MonoBehaviour
@@ -11,18 +9,14 @@ public class PhysicsButton : MonoBehaviour
     [SerializeField]
     private bool _oneTime = true;
 
+    [SerializeField]
+    private Material _onMaterial = null;
+
     private bool _activated = false;
 
     public UnityEvent onTrigger;
     public UnityEvent offTrigger;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (!_activated && (_button.localPosition.y < 0f))
@@ -30,6 +24,7 @@ public class PhysicsButton : MonoBehaviour
             if (_oneTime)
             {
                 _button.GetComponent<Rigidbody>().isKinematic = true;
+                _button.GetComponent<Renderer>().material = _onMaterial;
             }
 
             onTrigger.Invoke();
