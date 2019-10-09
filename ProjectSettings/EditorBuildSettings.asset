@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Test/TestScene_AR.unity
     guid: ce3388b7e7e62ce4da54860b3e7a1a47
   - enabled: 1
-    path: Assets/Scenes/Level 1.unity
+    path: Assets/Scenes/Level LH 1.unity
     guid: 649c19f03b69e9548af7c03606116e96
   - enabled: 0
     path: Assets/Scenes/Test/TestScene_Wind.unity
@@ -38,9 +38,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/t_test/lvl_T_1.unity
     guid: 5776f3e83e9a56149b0cc5953ac428a3
-  - enabled: 1
-    path: Assets/Scenes/candy_Land_platformer.unity
+  - enabled: 0
+    path: Assets/Scenes/t_test/candy_Land_platformer.unity
     guid: 1b52ed943d9256d47864809ac5e191de
+  - enabled: 1
+    path: Assets/Scenes/candy_Land_platformer_02.unity
+    guid: 5c9c523d1527d2e4ebe82bdb48666f61
   - enabled: 1
     path: Assets/Scenes/menus/winner.unity
     guid: 62a9b99d19f97184b87fc3c4cbf22965

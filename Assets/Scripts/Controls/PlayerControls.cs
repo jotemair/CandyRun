@@ -40,6 +40,7 @@ public class PlayerControls : MonoBehaviour
 
     private Vector3 _movementInput = Vector3.zero;
     private bool _jumpInput = false;
+    private bool _jumpInputHeld = false;
 
     private Vector3 _contactNormal = Vector3.zero;
     private Vector3 _stickyNormal = Vector3.zero;
@@ -55,6 +56,9 @@ public class PlayerControls : MonoBehaviour
 
     private float _jumpTimeout = 0.1f;
     private float _jumpTimer = 0f;
+
+    [SerializeField]
+    private bool _speedBoost = false;
 
     private Dictionary<int, List<ContactPoint>> _collisions = new Dictionary<int, List<ContactPoint>>();
 
@@ -78,6 +82,11 @@ public class PlayerControls : MonoBehaviour
         set { _jumpInput = value; }
     }
 
+    public bool JumpInputHeld
+    {
+        set { _jumpInputHeld = value; }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -97,9 +106,14 @@ public class PlayerControls : MonoBehaviour
     {
         GetNormals();
 
+        _sticking = _sticking && !_jumpInputHeld;
+
         _g.Gravity = ((_sticking) ? (_gravityWhileSticking) : (CustomGravity.DEFAULT_GRAVITY));
 
-        _rb.AddForce(_movementInput * _moveForce * (_grounded ? 1f : _airForceMultiplier));
+        Quaternion stickRot = ((_sticking) ? (Quaternion.FromToRotation(Vector3.up, _stickyNormal)) : (Quaternion.identity));
+        _rb.AddForce(stickRot * _movementInput.normalized * _moveForce * (_grounded ? 1f : _airForceMultiplier));
+
+        // Debug.DrawRay(transform.position, stickRot * _movementInput.normalized);
 
         if (_sticking)
         {
@@ -111,7 +125,7 @@ public class PlayerControls : MonoBehaviour
 
         if (_jumpInput && (0 < _storedJumps))
         {
-            Vector3 jumpVector = (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero));
+            Vector3 jumpVector = (_speedBoost ? _rb.velocity.normalized : (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero)));
 
             if (Vector3.zero != jumpVector)
             {

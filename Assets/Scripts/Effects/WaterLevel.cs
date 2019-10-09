@@ -101,8 +101,8 @@ public class WaterLevel : MonoBehaviour
                 X_Vector = Hipo * ray_x.direction - Hipo * ray_0.direction;
                 Y_Vector = Hipo * ray_y.direction - Hipo * ray_0.direction;
 
-                Debug.DrawRay(transform.position + Hipo * ray_0.direction, X_Vector, Color.red);
-                Debug.DrawRay(transform.position + Hipo * ray_0.direction, Y_Vector, Color.green);
+                // Debug.DrawRay(transform.position + Hipo * ray_0.direction, X_Vector, Color.red);
+                // Debug.DrawRay(transform.position + Hipo * ray_0.direction, Y_Vector, Color.green);
 
                 Screen_Corner = transform.position + Hipo * ray_0.direction;
 

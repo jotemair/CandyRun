@@ -22,7 +22,8 @@ public class PlayerControlsInput : MonoBehaviour
         keyboadInput = rotate * keyboadInput;
 
         _controls.MovementInput = keyboadInput;
-         _controls.JumpInput = Input.GetKeyDown(KeyCode.Space);
-        
+        _controls.JumpInput = Input.GetKeyDown(KeyCode.Space);
+
+        _controls.JumpInputHeld = Input.GetKey(KeyCode.Space);
     }
 }
