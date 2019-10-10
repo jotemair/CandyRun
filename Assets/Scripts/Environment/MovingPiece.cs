@@ -47,7 +47,23 @@ public class MovingPiece : MonoBehaviour
             _movingPiece.position = Vector3.SmoothDamp(_movingPiece.position, _positions[_targetPosIdx].position, ref _velocity, Time.deltaTime, _moveSpeed);
             _movingPiece.rotation = Quaternion.RotateTowards(_movingPiece.rotation, _positions[_targetPosIdx].rotation, _rotationSpeed);
 
-            if ((_movingPiece.position.Equals(_positions[_targetPosIdx].position)) && (_movingPiece.rotation.Equals(_positions[_targetPosIdx].rotation)))
+            bool posApproxEqual = false;
+            {
+                Vector3 piecePos = _movingPiece.position;
+                Vector3 targetPos = _positions[_targetPosIdx].position;
+
+                posApproxEqual = Mathf.Approximately(0f, Vector3.Distance(piecePos, targetPos));
+            }
+
+            bool rotApproxEqual = false;
+            {
+                Quaternion pieceRot = _movingPiece.rotation;
+                Quaternion targetRot = _positions[_targetPosIdx].rotation;
+
+                rotApproxEqual = Mathf.Approximately(0f, Quaternion.Angle(pieceRot, targetRot));
+            }
+
+            if (posApproxEqual && rotApproxEqual)
             {
                 StepTargetIdx();
             }

@@ -54,6 +54,7 @@ public class PlayerControls : MonoBehaviour
 
     private int _storedJumps = 0;
 
+    [SerializeField]
     private float _jumpTimeout = 0.1f;
     private float _jumpTimer = 0f;
 
@@ -125,7 +126,8 @@ public class PlayerControls : MonoBehaviour
 
         if (_jumpInput && (0 < _storedJumps))
         {
-            Vector3 jumpVector = (_speedBoost ? _rb.velocity.normalized : (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero)));
+            Vector3 lookVector = Vector3.Scale(Camera.main.transform.rotation * Vector3.forward, Vector3.right + Vector3.forward).normalized;
+            Vector3 jumpVector = (_speedBoost ? lookVector : (_grounded ? _lowestNormal : ((_canAirjump || (_coyoteTimer > 0f)) ? Vector3.up : Vector3.zero)));
 
             if (Vector3.zero != jumpVector)
             {
@@ -134,7 +136,7 @@ public class PlayerControls : MonoBehaviour
                 GetComponent<Rigidbody>().AddForce(jumpVector * _jumpForce, ForceMode.Impulse);
             }
         }
-        else if ((_grounded) && (0f == _jumpTimer))
+        else if ((_grounded || _speedBoost) && (0f == _jumpTimer))
         {
             _storedJumps = _maxJumpCount;
         }

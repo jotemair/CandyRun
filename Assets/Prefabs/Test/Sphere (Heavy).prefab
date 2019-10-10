@@ -233,11 +233,13 @@ MonoBehaviour:
   _moveForce: 2000
   _stickForce: 0
   _gravityWhileSticking: 5
-  _jumpForce: 1000
+  _jumpForce: 2500
   _canAirjump: 0
   _maxJumpCount: 1
   _airForceMultiplier: 0.7
   _coyoteTime: 0.2
+  _jumpTimeout: 1
+  _speedBoost: 1
 --- !u!114 &7922411693180393106
 MonoBehaviour:
   m_ObjectHideFlags: 0
