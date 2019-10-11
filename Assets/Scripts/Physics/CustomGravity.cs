@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 
+// Custom gravity module that allows better control over gravity than simply being able to turn it on or off
 [RequireComponent(typeof(Rigidbody))]
 public class CustomGravity : MonoBehaviour
 {
+    #region Private Variables
+
+    // Constant for default gravity value
     public const float DEFAULT_GRAVITY = 9.8f;
 
     [SerializeField]
@@ -12,6 +16,10 @@ public class CustomGravity : MonoBehaviour
     private Vector3 _direction = -Vector3.up;
 
     private Rigidbody _rb = null;
+
+    #endregion
+
+    #region Public Properties
 
     public float Gravity
     {
@@ -25,13 +33,19 @@ public class CustomGravity : MonoBehaviour
         set { _direction = value; }
     }
 
-    public void Start()
+    #endregion
+
+    #region MonoBehaviour Functions
+
+    private void Start()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         _rb.AddForce(_direction * _rb.mass * _gravity);
     }
+
+    #endregion
 }

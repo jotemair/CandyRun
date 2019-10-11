@@ -91,35 +91,56 @@ Shader "Custom/Camera/WaterLevel"
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
+				// Get the original color of the fragment
 				float4 texColor = tex2D(_MainTex, IN.uv);
 
+				// Calculate a linear zero to one depth value from the depth texture and screen position
 				float depthValue = Linear01Depth(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(IN.screenPos)).r);
 
+				// Get the world position of where the fragment would be of we projected to the camera far clip plane from the camera
 				float3 fragmentFarPlaneProjectionWorldPos = (_Vector_X * IN.screenPos.x + _Vector_Y * IN.screenPos.y + _Screen_Corner);
+
+				// Get the world space viewing direction of the camera
 				float3 viewDir = (fragmentFarPlaneProjectionWorldPos - _WorldSpaceCameraPos);
 
+				// Get the actual world space position of the fragment based on the depth value
 				float3 worldSpacePos = _WorldSpaceCameraPos + viewDir * depthValue;
 
+				// Note that the above is very slightly incorrect
+				// The length of the viewDir vector is from the camera position to the far clip plane projected position of the fragment
+				// On the other hand, the liner 01 depth represents going from the camera near clip plane position to the far clip plane position
+				// The correct calculation would be somthing like:
+				// float3 worldSpacePos = _WorldSpaceCameraPos + ((viewDir - vectorToNearPlaneProjection) * depthValue) + vectorToNearPlaneProjection;
+				// However this would require additional calculationas, and if the magnitude difference between the near and far plane distances is significant, the error is minimal.
+
+				// Ratio of how much we'd have to go along the view direction to intersect the water level
 				float surfaceDistRatio = (_WaterLevel - _WorldSpaceCameraPos.y) / viewDir.y;
+
+				// Get the world space position of the water surface
 				float3 waterSurfacePoint = _WorldSpaceCameraPos + viewDir * surfaceDistRatio;
 
+				// Get the base UV coordinates for the water texture based on the world space position of the water surface point, tiling the texture
 				float2 waterCoords = float2((waterSurfacePoint.x + _WaterDirection.x * _WaterDirection.z * (_Time.x % _WaterTexture_TexelSize.w)),
 					                        (waterSurfacePoint.z + _WaterDirection.y * _WaterDirection.z * (_Time.x % _WaterTexture_TexelSize.w)));
 
+				// Get the base UV coordinates for the noise texture based on the world space position of the water surface point, tiling the texture
 				float2 noiseCoords = float2((waterSurfacePoint.x + _NoiseDirection.x * _NoiseDirection.z * (_Time.x % _NoiseMap_TexelSize.w)),
 					                        (waterSurfacePoint.z + _NoiseDirection.y * _NoiseDirection.z * (_Time.x % _NoiseMap_TexelSize.w)));
 
+				// Calculate a 2D Noise based on the noise texture and strength
 				float2 noiseAmmount = tex2D(_NoiseMap, noiseCoords) * _NoiseDirection.w;
 
-				waterCoords += noiseAmmount;
+				// Calculate final water texture UV coordinates including noise perturbation
+				float2 waterUVpos = float2((waterCoords.x + noiseAmmount.x) % _WaterTexture_TexelSize.z, (waterCoords.y + noiseAmmount.y) % _WaterTexture_TexelSize.w);
 
-				float2 waterUVpos = float2(waterCoords.x % _WaterTexture_TexelSize.z, waterCoords.y % _WaterTexture_TexelSize.w);
-
+				// Get the color from the water texture and tint it
 				float4 water = tex2D(_WaterTexture, waterUVpos) * _ColorTint;
 
+				// Check if the water level is between the camera and the fragment world space position (we actually see the water, and it's not covered by the fragment)
 				bool waterLevelBetween = ((worldSpacePos.y <= _WaterLevel) && (_WaterLevel <= _WorldSpaceCameraPos.y)) ||
 										 ((_WorldSpaceCameraPos.y <= _WaterLevel) && (_WaterLevel <= worldSpacePos.y));
 
+				// Calculate the final color
 				float4 finalColor = (waterLevelBetween) ? (water + (texColor * (1.0 - water.a))) : texColor;
 
 				return finalColor;

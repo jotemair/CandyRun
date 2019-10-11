@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    #region Private Variables
+
     private Camera _cam = null;
 
     private PlayerControls _player = null;
@@ -27,22 +27,29 @@ public class CameraController : MonoBehaviour
 
     private float _angle = 0f;
 
-    // Start is called before the first frame update
-    void Start()
+    #endregion
+
+    #region MonoBehaviour Functions
+
+    private void Start()
     {
         _cam = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        // Try to get the player if we don't have a reference
+        // The player doesn't always exists, and at times the current one is destroyed and a new one is made, so we need to constantly check if the reference is still valid
         if (null == _player)
         {
             _player = FindObjectOfType<PlayerControls>();
         }
 
+        // Update the camera only if we have a player reference
         if (null != _player)
         {
+            // The J and L keys rotate the camera around the player, the angle value can go from 0 to 360 and loops
+
             if (Input.GetKey(KeyCode.J))
             {
                 _angle = (_angle - _angleSpeed) % 360f;
@@ -52,6 +59,9 @@ public class CameraController : MonoBehaviour
             {
                 _angle = (_angle + _angleSpeed) % 360f;
             }
+
+
+            // The I and  K keys change the camera pitch, the pitch value is clamped between a min and max
 
             if (Input.GetKey(KeyCode.I))
             {
@@ -63,18 +73,29 @@ public class CameraController : MonoBehaviour
                 _pitch = Mathf.Clamp(_pitch + _pitchSpeed, _pitchMin, _pitchMax);
             }
 
+            // Position the camera based on the current values
             PositionCamera(_pitch, _angle);
         }
     }
 
-    void PositionCamera(float pitch, float angle)
+    #endregion
+
+    #region Private Functions
+
+    // Helper function to position the camera with the given angle and pitch to look at the player
+    private void PositionCamera(float pitch, float angle)
     {
-        float distance = _distance;
+        // Get the rotation required to get the given angle and pitch
         Quaternion rotation = Quaternion.Euler(pitch, angle, 0f);
 
-        Vector3 position = _player.transform.position + rotation * -Vector3.forward * _distance;
+        // Rotate the back vector and multiply it by distance to get the position of the camera from the player
+        // Add that to the player's world position to get the camera world position
+        Vector3 position = _player.transform.position + rotation * Vector3.back * _distance;
 
+        // Set the camera position and rotation
         _cam.transform.rotation = rotation;
         _cam.transform.position = position;
     }
+
+    #endregion
 }
