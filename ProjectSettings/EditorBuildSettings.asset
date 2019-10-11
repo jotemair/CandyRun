@@ -17,8 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level LH 1.unity
     guid: 649c19f03b69e9548af7c03606116e96
-  - enabled: 1
-    path: Assets/Scenes/candy_Land_platformer.unity
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/1b52ed943d9256d47864809ac5e191de
     guid: 1b52ed943d9256d47864809ac5e191de
   - enabled: 1
     path: Assets/Scenes/menus/winner.unity
@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level LS 1.unity
     guid: 64a7743916b10f340810df72ac17e8ae
+  - enabled: 1
+    path: Assets/Scenes/candy_Land_platformer_02.unity
+    guid: 5c9c523d1527d2e4ebe82bdb48666f61
   m_configObjects: {}

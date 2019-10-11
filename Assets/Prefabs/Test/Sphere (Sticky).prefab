@@ -139,13 +139,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveForce: 1100
-  _stickForce: 1000
+  _stickForce: 10000
   _gravityWhileSticking: 1.5
   _jumpForce: 0
   _canAirjump: 1
   _maxJumpCount: 0
   _airForceMultiplier: 0.2
   _coyoteTime: 0
+  _jumpTimeout: 0.1
+  _speedBoost: 0
 --- !u!114 &6797747761649613038
 MonoBehaviour:
   m_ObjectHideFlags: 0

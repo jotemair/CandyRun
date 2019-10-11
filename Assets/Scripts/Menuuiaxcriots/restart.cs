@@ -12,7 +12,7 @@ public class restart : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(9);
             Debug.Log("restart");
         }
     }
