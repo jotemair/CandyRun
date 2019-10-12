@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4370801, g: 0.48478884, b: 0.56505114, a: 1}
+  m_IndirectSpecularColor: {r: 0.43708062, g: 0.48478937, b: 0.5650523, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2278,8 +2278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d244fa52bd56f049a3b8373fe75be53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 0
-  _triggered: 0
   OnTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -2296,6 +2294,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  _time: 0
+  _triggered: 0
 --- !u!1001 &209068737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10574,7 +10574,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

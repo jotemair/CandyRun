@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1415,8 +1415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d244fa52bd56f049a3b8373fe75be53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 0
-  _triggered: 0
   OnTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -1433,6 +1431,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  _time: 0
+  _triggered: 0
 --- !u!1001 &207157755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4305,7 +4305,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -8359,6 +8359,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 355845438378167475, guid: dbccd7511399dca45b9b16f6a0e29997,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 292.32495
+      objectReference: {fileID: 0}
+    - target: {fileID: 355845438378167475, guid: dbccd7511399dca45b9b16f6a0e29997,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 15.278001
+      objectReference: {fileID: 0}
+    - target: {fileID: 355845438378167475, guid: dbccd7511399dca45b9b16f6a0e29997,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 280.05
+      objectReference: {fileID: 0}
     - target: {fileID: 355845436463312916, guid: dbccd7511399dca45b9b16f6a0e29997,
         type: 3}
       propertyPath: onTrigger.m_PersistentCalls.m_Calls.Array.size
@@ -8418,21 +8433,6 @@ PrefabInstance:
         type: 3}
       propertyPath: offTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 355845438378167475, guid: dbccd7511399dca45b9b16f6a0e29997,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 292.32495
-      objectReference: {fileID: 0}
-    - target: {fileID: 355845438378167475, guid: dbccd7511399dca45b9b16f6a0e29997,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 15.278001
-      objectReference: {fileID: 0}
-    - target: {fileID: 355845438378167475, guid: dbccd7511399dca45b9b16f6a0e29997,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 280.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbccd7511399dca45b9b16f6a0e29997, type: 3}
